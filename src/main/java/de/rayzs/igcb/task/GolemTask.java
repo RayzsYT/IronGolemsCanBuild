@@ -78,7 +78,7 @@ public class GolemTask implements Runnable {
                 .setDirection(new Vector(0, 0, 0))
         );
 
-        golem.setVelocity(golem.getVelocity().add(new Vector(0, 0.25, 0)));
+        golem.setVelocity(golem.getVelocity().add(new Vector(0, 0.4, 0)));
         block.setType(placingBlockMaterial);
 
         final Sound sound = block.getBlockSoundGroup().getPlaceSound();
