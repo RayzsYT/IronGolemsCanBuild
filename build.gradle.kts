@@ -3,7 +3,11 @@ plugins {
 }
 
 group = "de.rayzs"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
+
+tasks.processResources {
+    expand("projectVersion" to project.version)
+}
 
 repositories {
     maven(url = "https://repo.papermc.io/repository/maven-public/") {

@@ -5,7 +5,7 @@ description: Allows iron golems to build up to players.
 
 main: de.rayzs.igcb.IGCBPluginLoader
 
-version: 1.0.0
+version: ${projectVersion}
 api-version: 1.13
 
 folia-supported: true
