@@ -6,7 +6,7 @@ group = "de.rayzs"
 version = "1.0.1"
 
 tasks.processResources {
-    expand("projectVersion" to project.version)
+    expand("version" to project.version)
 }
 
 repositories {
