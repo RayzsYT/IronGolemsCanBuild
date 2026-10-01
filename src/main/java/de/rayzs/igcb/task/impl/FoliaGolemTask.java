@@ -62,7 +62,7 @@ public class FoliaGolemTask implements GolemTask {
         }
 
 
-        golemPlaceBlockBelow(golem, Material.DIRT);
+        golemPlaceBlockBelow(golem, Material.DIRT, golem::teleportAsync);
     }
 
     @Override

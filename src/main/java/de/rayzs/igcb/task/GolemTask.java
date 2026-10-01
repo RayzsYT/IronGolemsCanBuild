@@ -9,6 +9,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface GolemTask {
@@ -33,8 +35,9 @@ public interface GolemTask {
 
     default void golemPlaceBlockBelow(
             final LivingEntity golem,
-            final Material placingBlockMaterial
-    ) {
+            final Material placingBlockMaterial,
+            final Consumer<Location> teleportConsumer
+            ) {
         final Location location = golem.getLocation().clone();
         final Block block = location.getBlock();
 
@@ -44,7 +47,7 @@ public interface GolemTask {
 
 
         // Force golem to look at the ground.
-        golem.teleport(location
+        teleportConsumer.accept(location
                 .setDirection(new Vector(0, 0, 0))
         );
 
