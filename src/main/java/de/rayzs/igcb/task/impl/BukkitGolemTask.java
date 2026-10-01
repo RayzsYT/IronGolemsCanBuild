@@ -43,12 +43,14 @@ public class BukkitGolemTask extends BukkitRunnable implements GolemTask {
 
 
         // Push golem towards player is there's a block distance.
-        if (distance.get() >= 1.25) {
-            golem.setVelocity(golem.getVelocity().add(new Vector(
-                    player.getX() - golem.getX(),
-                    0,
-                    player.getZ() - golem.getZ()
-            )));
+        if (distance.get() >= 1) {
+            golem.setVelocity(
+                    golem.getVelocity().add(new Vector(
+                            player.getX() - golem.getX(),
+                            0,
+                            player.getZ() - golem.getZ()
+                    )).normalize().multiply(0.8)
+            );
         }
 
 
