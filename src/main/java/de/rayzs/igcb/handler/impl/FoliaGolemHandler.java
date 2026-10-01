@@ -11,7 +11,6 @@ import org.bukkit.plugin.Plugin;
 public class FoliaGolemHandler extends GolemHandler<FoliaGolemTask> {
 
     private final Plugin plugin;
-    private ScheduledTask scheduledTask;
 
     public FoliaGolemHandler(final Plugin plugin) {
         this.plugin = plugin;
