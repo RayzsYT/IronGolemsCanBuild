@@ -11,9 +11,9 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 public class GolemListener implements Listener {
 
 
-    private final GolemHandler tasks;
+    private final GolemHandler<?> tasks;
 
-    public GolemListener(final GolemHandler tasks) {
+    public GolemListener(final GolemHandler<?> tasks) {
         this.tasks = tasks;
     }
 
