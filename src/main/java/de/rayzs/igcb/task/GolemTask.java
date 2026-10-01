@@ -8,65 +8,32 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+import java.util.function.Supplier;
 
-public class GolemTask implements Runnable {
+public interface GolemTask {
 
-    private final GolemTasks tasks;
-    private final int id;
-    private final Player player;
-    private final LivingEntity golem;
+    void cancel();
 
-    private int taskId = -1;
-
-    public GolemTask(final GolemTasks tasks, final int id, final Player player, final LivingEntity golem) {
-        this.tasks = tasks;
-        this.id = id;
-        this.player = player;
-        this.golem = golem;
-    }
-
-    public void setTaskId(final int taskId) {
-        if (taskId < 0) {
-            throw new IllegalStateException("Task ID cannot be negative");
+    default boolean isInvalid(
+            final Player player,
+            final LivingEntity golem,
+            final Supplier<Double> distance
+    ) {
+        if (player.isDead() || !player.isOnline()) {
+            return true;
         }
 
-        if (this.taskId == -1) {
-            this.taskId = taskId;
-            return;
+        if (!player.getWorld().getName().equalsIgnoreCase(golem.getWorld().getName())) {
+            return true;
         }
 
-        throw new IllegalStateException("Task ID is already set!");
+        return distance.get() > 30;
     }
 
-    public int getTaskId() {
-        return this.taskId;
-    }
-
-    @Override
-    public void run() {
-
-        if (!player.getWorld().getName().equalsIgnoreCase(golem.getWorld().getName()) || player.isDead() || !player.isOnline()) {
-            tasks.destructTask(id);
-            return;
-        }
-
-
-        final double distance = xzDistance();
-
-        if (distance > 30) {
-            tasks.destructTask(id);
-            return;
-        }
-
-
-        if (distance > 2) return;
-        if (Math.abs(player.getY() - golem.getY()) < 1) return;
-
-
-        golemPlaceBlockBelow(Material.DIRT);
-    }
-
-    private void golemPlaceBlockBelow(final Material placingBlockMaterial) {
+    default void golemPlaceBlockBelow(
+            final LivingEntity golem,
+            final Material placingBlockMaterial
+    ) {
         final Location location = golem.getLocation().clone();
         final Block block = location.getBlock();
 
@@ -89,7 +56,10 @@ public class GolemTask implements Runnable {
         });
     }
 
-    private double xzDistance() {
+    default double xzDistance(
+            final Player player,
+            final LivingEntity golem
+    ) {
         final Location playerLocation = player.getLocation();
 
         final double playerX = playerLocation.getX();

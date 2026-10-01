@@ -1,6 +1,6 @@
 package de.rayzs.igcb.listener;
 
-import de.rayzs.igcb.task.GolemTasks;
+import de.rayzs.igcb.handler.GolemHandler;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,9 +11,9 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 public class GolemListener implements Listener {
 
 
-    private final GolemTasks tasks;
+    private final GolemHandler tasks;
 
-    public GolemListener(final GolemTasks tasks) {
+    public GolemListener(final GolemHandler tasks) {
         this.tasks = tasks;
     }
 
